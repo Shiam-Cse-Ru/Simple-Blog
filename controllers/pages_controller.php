@@ -17,7 +17,11 @@
       require_once('views/pages/register.php');
     }
 
+    public function logout(){
 
+
+      require_once('views/pages/logout.php');
+    }
     public function error() {
       require_once('views/pages/error.php');
     }

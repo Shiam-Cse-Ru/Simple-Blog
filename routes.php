@@ -18,7 +18,7 @@
   }
 
   // we're adding an entry for the new controller and its actions
-  $controllers = array('pages' => ['home', 'error','login','register'],
+  $controllers = array('pages' => ['home', 'error','login','register','logout'],
                        'posts' => ['index', 'show']);
 
   if (array_key_exists($controller, $controllers)) {
