@@ -38,6 +38,47 @@ $message="";
         
     }
 
+ public static  function GetUserIdByPostId($id)
+  {
+  $db = mysqli_connect("localhost", "root", "", "simple_blog");
+      
+       $result =mysqli_query($db,"SELECT user_id FROM comments WHERE post_id='$id' ");
+       mysqli_close($db);
+
+     if (mysqli_num_rows($result) == 0) {
+        $message="There is no posts available";
+    } 
+    else {
+
+
+       $row = mysqli_fetch_assoc($result);
+      return $row;
+ 
+      }
+  }
+
+   public static  function GetUserNameByPostId($id)
+  {
+    $db = mysqli_connect("localhost", "root", "", "simple_blog");
+      
+       $result =mysqli_query($db,"SELECT user_name FROM user WHERE user_id='$id' ");
+       mysqli_close($db);
+
+     if (mysqli_num_rows($result) == 0) {
+        $message="There is no posts available";
+    } 
+    else {
+
+
+       $row = mysqli_fetch_assoc($result);
+      return $row;
+     
+   
+   
+    
+      }
+  }
+
     public static function find($id) {
      
       $db = mysqli_connect("localhost", "root", "", "simple_blog");
@@ -165,6 +206,37 @@ $message="";
       return false;
     }
   }
+
+    public static function CreateComment($post_id, $user_id,$comment)
+  {
+
+    $db = mysqli_connect("localhost", "root", "", "simple_blog");
+    $sql = "INSERT INTO `comments` (`post_id`,`user_id`,`body`) VALUES ('{$post_id}','{$user_id}','{$comment}')";
+    $result = mysqli_query($db, $sql);
+    mysqli_close($db);
+    if($result) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+   public static function Show_Comment($id) {
+     
+       $db = mysqli_connect("localhost", "root", "", "simple_blog");
+       $result =mysqli_query($db,"SELECT * FROM comments WHERE post_id='$id' ");
+       mysqli_close($db);
+
+     if (mysqli_num_rows($result) == 0) {
+        $message="There is no posts available";
+    } 
+    else {
+
+    return $result;
+    
+      }
+        
+    }
 
   }
 ?>

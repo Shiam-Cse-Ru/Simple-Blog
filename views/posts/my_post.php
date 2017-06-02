@@ -16,11 +16,11 @@ if (isset($_SESSION['user_name'])) {
 
 
 <div class="row">
-<div class="col-sm-6">
+<div class="col-md-10 col-md-offset-1">
  <?php while($post=mysqli_fetch_array($posts)) { ?>
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title"><?php echo $post['title']; ?></h3>
+    <h3><?php echo $post['title']; ?></h3>
   </div>
   <div class="panel-body">
   <p><?php echo $post['content']; ?></p>
