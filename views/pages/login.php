@@ -13,8 +13,11 @@
 
                                 if ($user == null) {
                                     $message = "Wrong \"email\" or \"password\". Please try again.";
+                                     echo"<script>alert('wrong username or password ')</script>";
+
                                 } else {
-                                    $_SESSION['user'] = $user;
+                                    $user_name=Model::getUserNameByUserEmail($email);
+                                    $_SESSION['user_name'] = $user_name;
                                     $successmessage = "Logging-in successful.";
                                      echo"<script>window.open('?controller=posts&action=index','_self')</script>";
                                 }
@@ -39,7 +42,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Login</div>
                 <div class="panel-body">
-                        
+        
                         <form role="form" method="POST" action="?controller=pages&action=login">
                         
 

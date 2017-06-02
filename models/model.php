@@ -76,10 +76,10 @@ $message="";
   }
 
 
-  public static  function getUserIdByUserName($name)
+  public static  function getUserNameByUserEmail($email)
   {
     $db = mysqli_connect("localhost", "root", "", "simple_blog");
-    $sql = "SELECT user_id FROM `user` WHERE `user_name`='{$name}'";
+    $sql = "SELECT user_name FROM `user` WHERE `email`='{$email}'";
     $result = mysqli_query($db, $sql);
     if(mysqli_num_rows($result) == 1) {
       mysqli_close($db);

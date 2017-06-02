@@ -25,16 +25,21 @@
            <li><a href='?controller=pages&action=login'>Login</a></li>
 
          </ul>
+         <?php if (isset($_SESSION['user_name'])) {
+            
+             $user_name=$_SESSION['user_name'];
+           ?>
          <ul class="nav navbar-nav navbar-right">
          <li class="dropdown"> 
 
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php if (isset($_SESSION['user_name'])) {
-          echo $_SESSION['user_name'];
-          } ?><b class="caret"></b></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php 
+          
+          echo $user_name;
+           ?><b class="caret"></b></a>
 
         <ul class="dropdown-menu">
         
-         <li ><a href="dog.html">Add New Post</a></li>
+         <li ><a href="?controller=pages&action=create_post">Add New Post</a></li>
           <li><a href="cat.html">My Post</a></li>
           <li><a href="other.html">My Profile</a></li>
           <li><a href="?controller=pages&action=logout">Log Out</a></li>
@@ -46,7 +51,8 @@
 
             </li>
         </ul>
-
+   <?php } ?>
+   
 
 
 
