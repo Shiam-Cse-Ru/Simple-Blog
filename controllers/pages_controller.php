@@ -22,6 +22,7 @@
 
       require_once('views/pages/create_post.php');
     }
+     
 
     public function logout(){
 

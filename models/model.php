@@ -6,7 +6,25 @@ $message="";
     public static function all() {
      
        $db = mysqli_connect("localhost", "root", "", "simple_blog");
-       $result =mysqli_query($db,'SELECT * FROM posts');
+       $result =mysqli_query($db,'SELECT * FROM posts ORDER BY `id` DESC');
+       mysqli_close($db);
+
+     if (mysqli_num_rows($result) == 0) {
+        $message="There is no posts available";
+    } 
+    else {
+
+   
+    return $result;
+    
+      }
+        
+    }
+      
+    public static function my_post($user_id) {
+     
+       $db = mysqli_connect("localhost", "root", "", "simple_blog");
+       $result =mysqli_query($db,"SELECT * FROM posts WHERE user_id='$user_id' ");
        mysqli_close($db);
 
      if (mysqli_num_rows($result) == 0) {
@@ -19,8 +37,6 @@ $message="";
       }
         
     }
-      
-    
 
     public static function find($id) {
      
@@ -106,6 +122,49 @@ $message="";
     }
   }
 
+   public static function checkForExistingPost($title,$content)
+  {
   
+    $db = mysqli_connect("localhost", "root", "", "simple_blog");
+    $sql = "SELECT title FROM `user` WHERE `title`='{$title}' AND `content`='{$content}' ";
+    $result = mysqli_query($db, $sql);
+    if(mysqli_num_rows($result) == 1) {
+      mysqli_close($db);
+      return true;
+    } else {
+      mysqli_close($db);
+      return false;
+    }
+  }
+
+  public static  function getUserIdByUserName($user_name)
+  {
+    $db = mysqli_connect("localhost", "root", "", "simple_blog");
+    $sql = "SELECT user_id FROM `user` WHERE `user_name`='{$user_name}'";
+    $result = mysqli_query($db, $sql);
+    if(mysqli_num_rows($result) == 1) {
+      mysqli_close($db);
+      $row = mysqli_fetch_row($result);
+      return $row[0];
+    } else {
+      mysqli_close($db);
+      return 0;
+    }
+  }
+
+  public static  function CreateNewPost($user_id, $title,$content,$description)
+  {
+
+    $db = mysqli_connect("localhost", "root", "", "simple_blog");
+    $sql = "INSERT INTO `posts` (`user_id`, `title`, `content`, `description`) VALUES ('{$user_id}', '{$title}', '{$content}', '{$description}')";
+    $result = mysqli_query($db, $sql);
+    mysqli_close($db);
+    if($result) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   }
 ?>

@@ -40,7 +40,7 @@
         <ul class="dropdown-menu">
         
          <li ><a href="?controller=pages&action=create_post">Add New Post</a></li>
-          <li><a href="cat.html">My Post</a></li>
+          <li><a href="?controller=posts&action=my_post">My Posts</a></li>
           <li><a href="other.html">My Profile</a></li>
           <li><a href="?controller=pages&action=logout">Log Out</a></li>
           

@@ -16,5 +16,11 @@
       $post = Model::find($_GET['id']);
       require_once('views/posts/show.php');
     }
+
+
+      public function my_post() {
+      
+      require_once('views/posts/my_post.php');
+    }
   }
 ?>
