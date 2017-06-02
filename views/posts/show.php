@@ -38,10 +38,20 @@ if (isset($_POST['post'])) {
  ?>
  <?php 
   $show_comment=Model::Show_Comment($_GET['id']);
-
   $_SESSION['post_success']=$show_comment;
-  ?>
 
+  ?>
+<?php 
+$i = 0;
+$on_comment_user_id=Model::GetUserIdByPostId($_GET['id']);
+
+						  while ($id=mysqli_fetch_array($on_comment_user_id)) {
+	                         $data[$i++]=$id['user_id'];
+
+                           echo $i."<br>";
+                       }
+						
+ ?>
 
 <div class="container">
 <?php include 'header.php'; ?>
@@ -81,11 +91,14 @@ if (isset($_POST['post'])) {
 					<div class="list-group">
 						<div class="list-group-item">
 						<?php 
-						  $on_comment_user_id=Model::GetUserIdByPostId($_GET['id']);
-                           $arr=implode("",$on_comment_user_id);
-                         $on_comment_user_name=Model::GetUserNameByPostId($arr);
-						 ?> 
+						  while ($id=mysqli_fetch_array($on_comment_user_id)) {
+	
+                             
+                           $arr=implode("",$id);
+                         $on_comment_user_name=Model::GetUserNameByPostId($id);
+						 ?>  
 							<h3><?php echo $on_comment_user_name['user_name'] ; ?></h3>
+							<?php } ?>
 							<p>Jun 02,2017 at 06:05 pm</p>
 						</div>
 						<div class="list-group-item">

@@ -45,15 +45,14 @@ $message="";
        $result =mysqli_query($db,"SELECT user_id FROM comments WHERE post_id='$id' ");
        mysqli_close($db);
 
+    
      if (mysqli_num_rows($result) == 0) {
         $message="There is no posts available";
     } 
     else {
 
-
-       $row = mysqli_fetch_assoc($result);
-      return $row;
- 
+    return $result;
+    
       }
   }
 
