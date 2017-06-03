@@ -6,7 +6,7 @@ $message="";
     public static function all() {
      
        $db = mysqli_connect("localhost", "root", "", "simple_blog");
-       $result =mysqli_query($db,'SELECT * FROM posts ORDER BY `id` DESC');
+       $result =mysqli_query($db,'SELECT * FROM posts WHERE active=1 ORDER BY `id` DESC');
        mysqli_close($db);
 
      if (mysqli_num_rows($result) == 0) {
@@ -37,6 +37,69 @@ $message="";
       }
         
     }
+
+    public static  function TotalPosts($user_id)
+  {
+    $db = mysqli_connect("localhost", "root", "", "simple_blog");
+    $sql = "SELECT user_id FROM `posts` WHERE `user_id`='{$user_id}'";
+    $result = mysqli_query($db, $sql);
+    if(mysqli_num_rows($result) == true) {
+    
+      $row = mysqli_num_rows($result);
+      return $row;
+    } else {
+       
+      return 0;
+    }
+  }
+
+
+    public static  function TotalPublishPosts($user_id)
+  {
+    $i=1;
+    $db = mysqli_connect("localhost", "root", "", "simple_blog");
+    $sql = "SELECT user_id FROM `posts` WHERE `user_id`='{$user_id}' AND `active`='{$i}'";
+    $result = mysqli_query($db, $sql);
+    if(mysqli_num_rows($result) == true) {
+    
+      $row = mysqli_num_rows($result);
+      return $row;
+    } else {
+       
+      return 0;
+    }
+  }
+
+    public static  function TotalDraftPosts($user_id)
+  {
+    $i=0;
+    $db = mysqli_connect("localhost", "root", "", "simple_blog");
+    $sql = "SELECT user_id FROM `posts` WHERE `user_id`='{$user_id}' AND `active`='{$i}'";
+    $result = mysqli_query($db, $sql);
+    if(mysqli_num_rows($result) == true) {
+    
+      $row = mysqli_num_rows($result);
+      return $row;
+    } else {
+       
+      return 0;
+    }
+  }
+     public static  function TotalComments($user_id)
+  {
+    $i=0;
+    $db = mysqli_connect("localhost", "root", "", "simple_blog");
+    $sql = "SELECT user_id FROM `comments` WHERE `user_id`='{$user_id}'";
+    $result = mysqli_query($db, $sql);
+    if(mysqli_num_rows($result) == true) {
+    
+      $row = mysqli_num_rows($result);
+      return $row;
+    } else {
+       
+      return 0;
+    }
+  }
 
  public static  function GetUserIdByPostId($id)
   {
@@ -209,9 +272,9 @@ $message="";
 
   public static  function CreateNewPost($user_id, $title,$content,$description)
   {
-
+    $i=1;
     $db = mysqli_connect("localhost", "root", "", "simple_blog");
-    $sql = "INSERT INTO `posts` (`user_id`, `title`, `content`, `description`) VALUES ('{$user_id}', '{$title}', '{$content}', '{$description}')";
+    $sql = "INSERT INTO `posts` (`user_id`, `title`, `content`, `description`,`active`) VALUES ('{$user_id}', '{$title}', '{$content}', '{$description}', '{$i}')";
     $result = mysqli_query($db, $sql);
     mysqli_close($db);
     if($result) {
@@ -220,6 +283,21 @@ $message="";
       return false;
     }
   }
+
+    public static  function SaveAsDraft($user_id, $title,$content,$description)
+  {
+    $i=0;
+    $db = mysqli_connect("localhost", "root", "", "simple_blog");
+    $sql = "INSERT INTO `posts` (`user_id`, `title`, `content`, `description`,`active`) VALUES ('{$user_id}', '{$title}', '{$content}', '{$description}', '{$i}')";
+    $result = mysqli_query($db, $sql);
+    mysqli_close($db);
+    if($result) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
 
     public static function CreateComment($post_id, $user_id,$comment)
   {
@@ -252,10 +330,11 @@ $message="";
         
     }
 
-    public static function UpdatePost($id,$title, $content,$description)
+    public static function UpdatePostPublish($id,$title, $content,$description)
   {
-      $db = mysqli_connect("localhost", "root", "", "simple_blog");
-    $sql = "UPDATE `posts` SET `title` = '{$title}',`content` = '{$content}',`description` = '{$description}' WHERE `id`='{$id}'";
+    $i=1;
+    $db = mysqli_connect("localhost", "root", "", "simple_blog");
+    $sql = "UPDATE `posts` SET `title` = '{$title}',`content` = '{$content}',`description` = '{$description}',`active` = '{$i}' WHERE `id`='{$id}'";
     $result = mysqli_query($db, $sql);
     mysqli_close($db);
     if($result) {
@@ -265,6 +344,32 @@ $message="";
     }
   }
 
+   public static function UpdatePostDraft($id,$title, $content,$description)
+  {
+    $i=0;
+    $db = mysqli_connect("localhost", "root", "", "simple_blog");
+    $sql = "UPDATE `posts` SET `title` = '{$title}',`content` = '{$content}',`description` = '{$description}',`active` = '{$i}' WHERE `id`='{$id}'";
+    $result = mysqli_query($db, $sql);
+    mysqli_close($db);
+    if($result) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  public static function DeletePost($id)
+  {
+    $db = mysqli_connect("localhost", "root", "", "simple_blog");
+    $sql = "DELETE FROM posts WHERE id='$id'";
+    $result = mysqli_query($db, $sql);
+    mysqli_close($db);
+    if($result) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   }
 ?>

@@ -41,6 +41,41 @@ if (isset($_POST['publish'])) {
 
 }
 
+if (isset($_POST['save'])) {
+     if (trim($_POST['title'])=='' || trim($_POST['content'])=='' || trim($_POST['description'])=='') {
+                                $message = "Please fill all the fields with valid data.";
+                            } 
+
+                              else {
+                                $title = trim($_POST['title']);
+                                $content = trim($_POST['content']);
+                                $description = trim($_POST['description']);
+
+                                  if (Model::checkForExistingPost($title,$content)) {
+                                    $_SESSION['post_error'] = "<span class='error'>The provided post is already declared. Create different post.</span>";
+                                      header("Location: ?controller=pages&action=create_post");
+                                }
+
+                                 else {
+                                     $userid=Model::getUserIdByUserName($user_name);
+                                     
+                                    if (Model::SaveAsDraft($userid,$title,$content, $description)) {
+                                         echo "<script>alert('Post Successfuly Update')</script>"; 
+
+                                            header('Location: ?controller=posts&action=index');
+
+                                    }
+
+                                    else {
+              $_SESSION['post_error'] = "<span class='error'>Unknown problem occured. Try again.</span>";
+              header("Location: ?controller=pages&action=create_post");
+            }
+                                } 
+
+                            }
+
+}
+
 
  ?>
 
@@ -67,7 +102,7 @@ if (isset($_POST['publish'])) {
         <textarea class="tinymce" id="texteditor" name="description" "></textarea>
     </div>
     <input type="submit" name='publish' class="btn btn-success" value = "Publish"/>
-    <input type="submit" name='save' class="btn btn-default" value = "Save Draft" />
+    <input type="submit" name='save' class="btn btn-default" value = "Save As Draft" />
 </form>
                         </div>
                     </div>

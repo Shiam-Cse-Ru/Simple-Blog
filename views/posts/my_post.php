@@ -15,6 +15,25 @@ if (isset($_SESSION['user_name'])) {
  <div class="container">
 <?php include 'header.php'; ?>
 
+<?php if (isset($_SESSION['delete_success'])) {
+ echo'<div class="flash alert-info">
+        <p class="panel-body">
+          Post Successfully Delete
+        </p>
+      </div>';
+      unset($_SESSION['delete_success']);
+} 
+else if(isset($_SESSION['delete_error'])){
+ echo'<div class="flash alert-info">
+        <p class="panel-body">
+          Something wrong
+        </p>
+      </div>';
+     unset($_SESSION['delete_error']);
+}
+
+
+      ?>
 
 <div class="row">
 <div class="col-md-10 col-md-offset-1">
@@ -53,7 +72,7 @@ if (isset($_SESSION['user_name'])) {
 else{
 
 echo "<div class='alert alert-info'>
-  <strong>You!</strong> have no post available.
+  <strong>Opps!</strong> You have no post available.
 </div>";  
 }
 

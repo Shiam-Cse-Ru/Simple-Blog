@@ -13,7 +13,12 @@
   </div>
   <div class="panel-body">
  <div class="">
- <?php while($post=mysqli_fetch_array($posts)) { ?>
+
+ <?php 
+$_SESSION['allposts']=$posts;
+ if (isset($_SESSION['allposts'])) {
+
+  while($post=mysqli_fetch_array($posts)) { ?>
     <div class="list-group">
     <div class="list-group-item">
       <h3><a href="#">  <h3><?php echo $post['title']; ?></h3></a>
@@ -28,7 +33,18 @@
       </article>
     </div>
   </div>
-<?php } ?>
+<?php } }
+
+else{
+
+ echo "<div class='alert alert-info'>
+  <strong>Opps!</strong> There is no post available.
+</div>";
+
+}
+
+
+?>
     
     
 </div>

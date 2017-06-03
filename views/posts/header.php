@@ -20,9 +20,16 @@
         <ul class="nav navbar-nav">
               <li ><a href='?controller=pages&action=home'>Home</a></li>
             <li class="active "><a href='?controller=posts&action=index'>Blog</a></li>
+             <?php if (!isset($_SESSION['user_name'])) {
+            
+            ?>
            <li><a href='?controller=pages&action=register'>Register</a></li>
-
+           <?php } ?>
+            <?php if (!isset($_SESSION['user_name'])) {
+            
+            ?>
            <li><a href='?controller=pages&action=login'>Login</a></li>
+               <?php } ?>
 
          </ul>
          <?php if (isset($_SESSION['user_name'])) {
@@ -41,7 +48,7 @@
         
          <li ><a href="?controller=pages&action=create_post">Add New Post</a></li>
           <li><a href="?controller=posts&action=my_post">My Posts</a></li>
-          <li><a href="other.html">My Profile</a></li>
+          <li><a href="?controller=pages&action=profile">My Profile</a></li>
           <li><a href="?controller=pages&action=logout">Log Out</a></li>
           
 

@@ -20,9 +20,9 @@ if (isset($_POST['update'])) {
                       
                                   // $userid=Model::getUserIdByUserName($user_name);
                                      
-                                    if (Model::UpdatePost($PostId,$title,$content, $description)) {
+                                    if (Model::UpdatePostPublish($PostId,$title,$content, $description)) {
                                         
-                                       echo "<script><alert('Post Successfuly Update')/script>"; 
+                                       echo "<script>alert('Post Successfuly Update')</script>"; 
                                       header('Location: ?controller=posts&action=my_post');
 
                                     }
@@ -37,6 +37,49 @@ if (isset($_POST['update'])) {
 
 }
 
+
+if (isset($_POST['save'])) {
+     if (trim($_POST['title'])=='' || trim($_POST['content'])=='' || trim($_POST['description'])=='') {
+                                $message = "Please fill all the fields with valid data.";
+                            } 
+
+                              else {
+                                $title = trim($_POST['title']);
+                                $content = trim($_POST['content']);
+                                $description = trim($_POST['description']);
+                                $PostId=$_GET['id'];
+                      
+                                  // $userid=Model::getUserIdByUserName($user_name);
+                                     
+                                    if (Model::UpdatePostDraft($PostId,$title,$content, $description)) {
+                                        
+                                       echo "<script>alert('Post Successfuly Update')</script>"; 
+                                      header('Location: ?controller=posts&action=my_post');
+
+                                    }
+
+                                    else {
+              $_SESSION['post_error'] = "<span class='error'>Unknown problem occured. Try again.</span>";
+              header("Location: ?controller=posts&action=my_post");
+            }
+                             
+
+                            }
+
+}
+
+if (isset($_POST['delete'])) {
+  $PostId=$_GET['id'];
+  if (Model::DeletePost($PostId)) {
+ $_SESSION['delete_success'] =true;
+
+     header("Location: ?controller=posts&action=my_post");
+  }
+  else{
+       $_SESSION['delete_error'] =true;
+       header("Location: ?controller=posts&action=my_post");
+  }
+}
 
  ?>
 
@@ -67,8 +110,9 @@ $post=Model::find($_GET['id']);
     <div class="form-group">
         <textarea class="tinymce" id="texteditor" name="description"><?php echo $post['description']; ?></textarea>
     </div>
-    <input type="submit" name='update' class="btn btn-success" value = "Update"/>
-    <input type="submit" name='save' class="btn btn-default" value = "Save Draft" />
+    <input type="submit" name='update' class="btn btn-success" value = "Publish"/>
+    <input type="submit" name='save' class="btn btn-default" value = "Save As Draft" />
+    <input type="submit" name='delete' class="btn btn-danger" value = "Delete" />
 </form>
                         </div>
                     </div>

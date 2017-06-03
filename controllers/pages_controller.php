@@ -28,6 +28,12 @@
 
       require_once('views/pages/edit_post.php');
     } 
+      public function profile(){
+
+
+      require_once('views/pages/profile.php');
+    } 
+
 
     public function logout(){
 
