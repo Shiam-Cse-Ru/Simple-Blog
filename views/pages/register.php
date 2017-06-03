@@ -1,5 +1,6 @@
 <?php session_start(); ?>
 <?php 
+
 $message="";
 
                     if (isset($_POST['submit'])) {
@@ -12,7 +13,7 @@ $message="";
                                 $name = trim($_POST['name']);
                                 $email = trim($_POST['email']);
                                 $password = trim($_POST['password']);
-
+                                $date=date("Y-m-d h:i:sa");
                                 if (Model::checkForExistingUserName($name)) {
                                     $_SESSION['registration_error'] = "<span class='error'>The provided User Name is unavailable. Enter a different User Name.</span>";
                                       header("Location: ?controller=pages&action=register");
@@ -20,7 +21,7 @@ $message="";
 
                                 else {
                                     $password = md5($password);
-                                    if (Model::CreateNewuser($name, $email, $password)) {
+                                    if (Model::CreateNewuser($name, $email, $password,$date)) {
                                          //$user_id = getUserIdByUserName($name);
                                          $_SESSION['user_name'] = $name;
                                             header('Location: ?controller=pages&action=login');
@@ -88,5 +89,4 @@ $message="";
         </div>
     </div>
 </div>
-
 

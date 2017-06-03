@@ -180,11 +180,11 @@ $message="";
     }
   }
 
-  public static function CreateNewuser($name, $email,$password)
+  public static function CreateNewuser($name, $email,$password,$date)
   {
 
     $db = mysqli_connect("localhost", "root", "", "simple_blog");
-    $sql = "INSERT INTO `user` (`user_name`,`email`,`password`) VALUES ('{$name}','{$email}','{$password}')";
+    $sql = "INSERT INTO `user` (`user_name`,`email`,`password`,`created_date`) VALUES ('{$name}','{$email}','{$password}','{$date}')";
     $result = mysqli_query($db, $sql);
     mysqli_close($db);
     if($result) {
@@ -255,6 +255,20 @@ $message="";
     }
   }
 
+  public static  function GetUserjoindate($user_name)
+  {
+    $db = mysqli_connect("localhost", "root", "", "simple_blog");
+    $sql = "SELECT created_date FROM `user` WHERE `user_name`='{$user_name}'";
+    $result = mysqli_query($db, $sql);
+    if(mysqli_num_rows($result) == 1) {
+      mysqli_close($db);
+      $row = mysqli_fetch_row($result);
+      return $row[0];
+    } else {
+      mysqli_close($db);
+      return 0;
+    }
+  }
    public static function getUserNameByUserId($user_id)
   {
     $db = mysqli_connect("localhost", "root", "", "simple_blog");

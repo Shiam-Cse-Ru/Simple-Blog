@@ -10,7 +10,7 @@ $totalpost=Model::TotalPosts($user_id);
 $TotalPublishPost=Model::TotalPublishPosts($user_id);
 $PosInDraft=Model::TotalDraftPosts($user_id);
 $TotalComments=Model::TotalComments($user_id);
-
+$getyserjoineddate=Model::GetUserjoindate($user_name);
  ?>
 <div class="container">
 <?php include 'header.php'; ?>
@@ -22,12 +22,12 @@ $TotalComments=Model::TotalComments($user_id);
             <div class="panel-heading">
               <h2><?php echo $user_name; ?>
             </h2>
-                          </div>
+             </div>
             <div class="panel-body">
               <div>
   <ul class="list-group">
     <li class="list-group-item">
-      Joined on Jun 02,2017 at 10:52 am
+      Joined on  <td><?php echo $getyserjoineddate; ?></td>
     </li>
     <li class="list-group-item panel-body">
       <table class="table-padding">
