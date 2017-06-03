@@ -6,17 +6,35 @@
 
 <div class="row">
 <div class="col-md-10 col-md-offset-1">
- <?php while($post=mysqli_fetch_array($posts)) { ?>
+
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3><?php echo $post['title']; ?></h3>
+    <h3>Latest Posts</h3>
   </div>
   <div class="panel-body">
-  <p><?php echo $post['content']; ?></p>
+ <div class="">
+ <?php while($post=mysqli_fetch_array($posts)) { ?>
+    <div class="list-group">
+    <div class="list-group-item">
+      <h3><a href="#">  <h3><?php echo $post['title']; ?></h3></a>
+              </h3>
+      <p>Jun 02,2017 at 01:59 pm By <a href="#">shiam</a></p>
+      
+    </div>
+    <div class="list-group-item">
+      <article>
+        <p><?php echo $post['content']; ?></p>
    <p> <a href='?controller=posts&action=show&id=<?php echo $post['id']; ?>' class="btn btn-primary">Read More</a></p>
+      </article>
+    </div>
+  </div>
+<?php } ?>
+    
+    
+</div>
   </div>
 </div>
-<?php } ?>
+
 </div>
 </div>
  <footer>

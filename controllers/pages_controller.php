@@ -22,7 +22,12 @@
 
       require_once('views/pages/create_post.php');
     }
-     
+    
+      public function edit_post(){
+
+
+      require_once('views/pages/edit_post.php');
+    } 
 
     public function logout(){
 

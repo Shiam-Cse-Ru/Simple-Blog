@@ -17,10 +17,10 @@ if (isset($_POST['post'])) {
              $post_id=$_GET['id'];
              $user_id=Model::getUserIdByUserName($user_name);   
               if (Model::CreateComment($post_id, $user_id, $comment)) {
-                                         //$user_id = getUserIdByUserName($name);
+                    //$user_id = getUserIdByUserName($name);
                    //$_SESSION['post'] =true;
 
-                    header('Location: ?controller=posts&action=show&id=5');
+                    header('Location: ?controller=posts&action=show&id='.$id);
 
                     }
 
@@ -41,8 +41,8 @@ if (isset($_POST['post'])) {
   $_SESSION['post_success']=$show_comment;
 
   ?>
-<?php 
-$i = 0;
+<!-- <?php 
+
 $on_comment_user_id=Model::GetUserIdByPostId($_GET['id']);
 
 						  while ($id=mysqli_fetch_array($on_comment_user_id)) {
@@ -51,7 +51,7 @@ $on_comment_user_id=Model::GetUserIdByPostId($_GET['id']);
                            echo $i."<br>";
                        }
 						
- ?>
+ ?> -->
 
 <div class="container">
 <?php include 'header.php'; ?>
@@ -90,15 +90,9 @@ $on_comment_user_id=Model::GetUserIdByPostId($_GET['id']);
         <div class="panel-body">
 					<div class="list-group">
 						<div class="list-group-item">
-						<?php 
-						  while ($id=mysqli_fetch_array($on_comment_user_id)) {
-	
-                             
-                           $arr=implode("",$id);
-                         $on_comment_user_name=Model::GetUserNameByPostId($id);
-						 ?>  
-							<h3><?php echo $on_comment_user_name['user_name'] ; ?></h3>
-							<?php } ?>
+						  
+						
+							
 							<p>Jun 02,2017 at 06:05 pm</p>
 						</div>
 						<div class="list-group-item">

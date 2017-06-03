@@ -192,6 +192,21 @@ $message="";
     }
   }
 
+   public static function getUserNameByUserId($user_id)
+  {
+    $db = mysqli_connect("localhost", "root", "", "simple_blog");
+    $sql = "SELECT user_name FROM `user` WHERE `user_id`='{$user_id}'";
+    $result = mysqli_query($db, $sql);
+       if (mysqli_num_rows($result) == 0) {
+        $message="There is no posts available";
+    } 
+    else {
+     $row=mysqli_fetch_array($result);
+    return $row;
+    
+      }
+  }
+
   public static  function CreateNewPost($user_id, $title,$content,$description)
   {
 
@@ -236,6 +251,20 @@ $message="";
       }
         
     }
+
+    public static function UpdatePost($id,$title, $content,$description)
+  {
+      $db = mysqli_connect("localhost", "root", "", "simple_blog");
+    $sql = "UPDATE `posts` SET `title` = '{$title}',`content` = '{$content}',`description` = '{$description}' WHERE `id`='{$id}'";
+    $result = mysqli_query($db, $sql);
+    mysqli_close($db);
+    if($result) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
 
   }
 ?>
