@@ -22,15 +22,15 @@ if (isset($_POST['update'])) {
                                      
                                     if (Model::UpdatePostPublish($PostId,$title,$content, $description)) {
                                         
-                                       echo "<script>alert('Post Successfuly Update')</script>"; 
-                                      header('Location: ?controller=posts&action=my_post');
+                                    $successmsg="Post update successfully.";
+
 
                                     }
 
                                     else {
-              $_SESSION['post_error'] = "<span class='error'>Unknown problem occured. Try again.</span>";
-              header("Location: ?controller=posts&action=my_post");
-            }
+                                    $errmsg="Unknown problem occured.";
+
+                                    }
                              
 
                             }
@@ -53,15 +53,13 @@ if (isset($_POST['save'])) {
                                      
                                     if (Model::UpdatePostDraft($PostId,$title,$content, $description)) {
                                         
-                                       echo "<script>alert('Post Successfuly Update')</script>"; 
-                                      header('Location: ?controller=posts&action=my_post');
+                                      $successmsg="Post update and successfully saved in draft.";
 
                                     }
 
                                     else {
-              $_SESSION['post_error'] = "<span class='error'>Unknown problem occured. Try again.</span>";
-              header("Location: ?controller=posts&action=my_post");
-            }
+                                        $errmsg="Unknown problem occured.";
+                                  }
                              
 
                             }
@@ -93,6 +91,12 @@ $post=Model::find($_GET['id']);
     
     <div class="row">
       <div class="col-md-10 col-md-offset-1">
+       <?php echo !empty($successmsg)?'<div class="flash alert-success">
+      <p class="panel-body">'.$successmsg.'</p>
+      </div>':''; ?>
+       <?php echo !empty($errmsg)?'<div class="flash alert-danger">
+      <p class="panel-body">'.$errmsg.'</p>
+      </div>':''; ?>
                     <div class="panel panel-info">
                         <div class="panel-heading">
                             <h2>Edit Post</h2>

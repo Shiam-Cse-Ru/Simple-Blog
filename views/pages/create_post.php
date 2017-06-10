@@ -13,29 +13,25 @@ if (isset($_POST['publish'])) {
                             } 
 
                               else {
-                                $title = trim($_POST['title']);
-                                $content = trim($_POST['content']);
-                                $description = trim($_POST['description']);
+                                $title =$_POST['title'];
+                                $content = $_POST['content'];
+                                $description =$_POST['description'];
+                                $date=date("Y-m-d h:i:sa");
 
-                                  if (Model::checkForExistingPost($title,$content)) {
-                                    $_SESSION['post_error'] = "<span class='error'>The provided post is already declared. Create different post.</span>";
-                                      header("Location: ?controller=pages&action=create_post");
-                                }
+                          
 
-                                 else {
                                      $userid=Model::getUserIdByUserName($user_name);
                                      
-                                    if (Model::CreateNewPost($userid,$title,$content, $description)) {
+                                    if (Model::CreateNewPost($userid,$title,$content,$description,$date)) {
                                         
-                                            header('Location: ?controller=posts&action=index');
+                                      $successmsg="Post Create Sucessfull";
 
                                     }
 
                                     else {
-              $_SESSION['post_error'] = "<span class='error'>Unknown problem occured. Try again.</span>";
-              header("Location: ?controller=pages&action=create_post");
-            }
-                                } 
+                                       $errmsg="Unknown problem occured.";
+                                     }
+                                 
 
                             }
 
@@ -43,34 +39,29 @@ if (isset($_POST['publish'])) {
 
 if (isset($_POST['save'])) {
      if (trim($_POST['title'])=='' || trim($_POST['content'])=='' || trim($_POST['description'])=='') {
-                                $message = "Please fill all the fields with valid data.";
+                                $errmsg = "Please fill all the fields with valid data.";
                             } 
 
                               else {
                                 $title = trim($_POST['title']);
                                 $content = trim($_POST['content']);
                                 $description = trim($_POST['description']);
+                                $date=date("Y-m-d h:i:sa");
+                               
 
-                                  if (Model::checkForExistingPost($title,$content)) {
-                                    $_SESSION['post_error'] = "<span class='error'>The provided post is already declared. Create different post.</span>";
-                                      header("Location: ?controller=pages&action=create_post");
-                                }
-
-                                 else {
-                                     $userid=Model::getUserIdByUserName($user_name);
+                              
+                              $userid=Model::getUserIdByUserName($user_name);
                                      
-                                    if (Model::SaveAsDraft($userid,$title,$content, $description)) {
-                                         echo "<script>alert('Post Successfuly Update')</script>"; 
+                              if (Model::SaveAsDraft($userid,$title,$content, $description,$date)) {
+                                     $successmsg="Post sucessfully saved in Draft";
 
-                                            header('Location: ?controller=posts&action=index');
 
                                     }
 
                                     else {
-              $_SESSION['post_error'] = "<span class='error'>Unknown problem occured. Try again.</span>";
-              header("Location: ?controller=pages&action=create_post");
-            }
-                                } 
+                                        $errmsg="Unknown problem occured.";
+                                       }
+                              
 
                             }
 
@@ -84,6 +75,13 @@ if (isset($_POST['save'])) {
     
     <div class="row">
       <div class="col-md-10 col-md-offset-1">
+       <?php echo !empty($successmsg)?'<div class="flash alert-success">
+      <p class="panel-body">'.$successmsg.'</p>
+      </div>':''; ?>
+
+       <?php echo !empty($errmsg)?'<div class="flash alert-danger">
+      <p class="panel-body">'.$errmsg.'</p>
+      </div>':''; ?>
                     <div class="panel panel-info">
                         <div class="panel-heading">
                             <h2>Add New Post</h2>

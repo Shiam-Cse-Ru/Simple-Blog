@@ -16,7 +16,7 @@ if (isset($_SESSION['user_name'])) {
 <?php include 'header.php'; ?>
 
 <?php if (isset($_SESSION['delete_success'])) {
- echo'<div class="flash alert-info">
+ echo'<div class="flash alert-success">
         <p class="panel-body">
           Post Successfully Delete
         </p>
@@ -24,7 +24,7 @@ if (isset($_SESSION['user_name'])) {
       unset($_SESSION['delete_success']);
 } 
 else if(isset($_SESSION['delete_error'])){
- echo'<div class="flash alert-info">
+ echo'<div class="flash alert-danger">
         <p class="panel-body">
           Something wrong
         </p>

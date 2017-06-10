@@ -313,7 +313,7 @@ $message="";
   {
   
     $db = mysqli_connect("localhost", "root", "", "simple_blog");
-    $sql = "SELECT title FROM `user` WHERE `title`='{$title}' AND `content`='{$content}' ";
+    $sql = "SELECT title FROM `posts` WHERE `title`='{$title}' AND `content`='{$content}' ";
     $result = mysqli_query($db, $sql);
     if(mysqli_num_rows($result) == 1) {
       mysqli_close($db);
@@ -368,11 +368,11 @@ $message="";
       }
   }
 
-  public static  function CreateNewPost($user_id, $title,$content,$description)
+  public static  function CreateNewPost($user_id, $title,$content,$description,$date)
   {
     $i=1;
     $db = mysqli_connect("localhost", "root", "", "simple_blog");
-    $sql = "INSERT INTO `posts` (`user_id`, `title`, `content`, `description`,`active`) VALUES ('{$user_id}', '{$title}', '{$content}', '{$description}', '{$i}')";
+    $sql = "INSERT INTO `posts` (`user_id`, `title`, `content`, `description`,`active`,`created_date`) VALUES ('{$user_id}', '{$title}', '{$content}', '{$description}', '{$i}','{$date}')";
     $result = mysqli_query($db, $sql);
     mysqli_close($db);
     if($result) {
@@ -382,11 +382,11 @@ $message="";
     }
   }
 
-    public static  function SaveAsDraft($user_id, $title,$content,$description)
+    public static  function SaveAsDraft($user_id, $title,$content,$description,$date)
   {
     $i=0;
     $db = mysqli_connect("localhost", "root", "", "simple_blog");
-    $sql = "INSERT INTO `posts` (`user_id`, `title`, `content`, `description`,`active`) VALUES ('{$user_id}', '{$title}', '{$content}', '{$description}', '{$i}')";
+    $sql = "INSERT INTO `posts` (`user_id`, `title`, `content`, `description`,`active`,`created_date`) VALUES ('{$user_id}', '{$title}', '{$content}', '{$description}', '{$i}','{$date}')";
     $result = mysqli_query($db, $sql);
     mysqli_close($db);
     if($result) {
