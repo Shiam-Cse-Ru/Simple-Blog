@@ -9,24 +9,24 @@ if (isset($_SESSION['user_name'])) {
 $id=$_GET['id'];
 if (isset($_POST['post'])) {
 	 if (trim($_POST['comment'])=='') {
-         $message = "Please fill all the fields with valid data.";
+         $errmsg = "Please fill all the fields with valid data.";
          } 
 
          else {
              $comment = trim($_POST['comment']);
              $post_id=$_GET['id'];
+             $date=date("Y-m-d h:i:sa");
              $user_id=Model::getUserIdByUserName($user_name);   
-              if (Model::CreateComment($post_id, $user_id, $comment)) {
+              if (Model::CreateComment($post_id, $user_id, $comment,$date)) {
                     //$user_id = getUserIdByUserName($name);
                    //$_SESSION['post'] =true;
 
-                    header('Location: ?controller=posts&action=show&id='.$id);
-
+                    // header('Location: ?controller=posts&action=show&id='.$id);
+                    $successmsg="Comments create successful.";
                     }
 
                else {
-              $_SESSION['post_error'] = "<span class='error'>Unknown problem occured. Try again.</span>";
-              header("Location: ?controller=pages&action=home");
+              $errmsg="Something Wrong";
             }
                    
 
@@ -59,7 +59,7 @@ $on_comment_user_id=Model::GetUserIdByPostId($_GET['id']);
 <div class="row">
 <div class="col-md-10 col-md-offset-1">
 
-<div class="panel panel-default">
+<div class="panel panel-info">
   <div class="panel-heading">
     <h3><p><?php echo $post['title'];?></p></h3>
   </div>
@@ -69,9 +69,15 @@ $on_comment_user_id=Model::GetUserIdByPostId($_GET['id']);
 </div>
 
 <hr>
+
+       <?php echo !empty($successmsg)?'<div class="flash alert-success">
+      <p class="panel-body">'.$successmsg.'</p>
+      </div>':''; ?>
+
 <?php if (isset($_SESSION['user_name'])) {
 	
  ?>
+
 <div class="well">
       <h4>Leave a Comment:</h4>
        <form role="form" method="post" action="?controller=posts&action=show&id=<?php echo $_GET['id']; ?>" >
@@ -82,19 +88,25 @@ $on_comment_user_id=Model::GetUserIdByPostId($_GET['id']);
         </form>
         </div>
         <?php } ?>
-
+     <h3 style="padding-left: 20px; padding-top: 25px;"><b>All Comments</b></h3>
          <?php if (isset($_SESSION['post_success'])) {
          
          
-         while($show_comments=mysqli_fetch_array($show_comment)) { ?>
+         while($show_comments=mysqli_fetch_array($show_comment)) { 
+           
+           $userid=$show_comments['user_id'];
+          $getusername=Model::getUserNameByUserId($userid);
+
+          ?>
         <div class="panel-body">
 					<div class="list-group">
 						<div class="list-group-item">
 						  
 						
-							
-							<p>Jun 02,2017 at 06:05 pm</p>
+							 
+							<p>On <strong><?php echo $show_comments['created_date']; ?></strong> By <a href=""><?php echo $getusername[0]; ?></a></p>
 						</div>
+
 						<div class="list-group-item">
 							<p><?php echo $show_comments['body']; ?></p>
 						</div>

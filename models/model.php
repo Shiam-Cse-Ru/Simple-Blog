@@ -38,6 +38,47 @@ $message="";
         
     }
 
+
+   public static function GetLatestPostByUserId($user_id) {
+     
+       $db = mysqli_connect("localhost", "root", "", "simple_blog");
+       $result =mysqli_query($db,"SELECT * FROM posts WHERE user_id='$user_id' ORDER BY `id` DESC LIMIT 2");
+       mysqli_close($db);
+
+     if (mysqli_num_rows($result) == 0) {
+        $message="There is no posts available";
+    } 
+    else {
+
+   
+    return $result;
+    
+      }
+        
+    }
+
+
+      public static function GetLatestCommentByUserId($user_id) {
+     
+       $db = mysqli_connect("localhost", "root", "", "simple_blog");
+       $result =mysqli_query($db,"SELECT * FROM comments WHERE user_id='$user_id' ORDER BY `id` DESC LIMIT 2");
+       mysqli_close($db);
+
+     if (mysqli_num_rows($result) == 0) {
+        $message="There is no posts available";
+    } 
+    else {
+
+   
+    return $result;
+    
+      }
+        
+    }
+      
+
+
+
     public static  function TotalPosts($user_id)
   {
     $db = mysqli_connect("localhost", "root", "", "simple_blog");
@@ -141,6 +182,30 @@ $message="";
       }
   }
 
+
+  
+       public static function GetuserNameByPostUserId($userid) {
+     
+       $db = mysqli_connect("localhost", "root", "", "simple_blog");
+       $result =mysqli_query($db,"SELECT user_name FROM user WHERE user_id='$userid'");
+       mysqli_close($db);
+
+     if (mysqli_num_rows($result) == 0) {
+        $message="There is no posts available";
+    } 
+    else {
+      $row=mysqli_fetch_array($result);
+
+    return $row;
+    
+      }
+        
+    }
+
+
+
+
+
     public static function find($id) {
      
       $db = mysqli_connect("localhost", "root", "", "simple_blog");
@@ -162,6 +227,25 @@ $message="";
     
       }
     }
+
+
+
+    public static function GetPostByPostId($post_id)
+  {
+    $db = mysqli_connect("localhost", "root", "", "simple_blog");
+    $sql = "SELECT title FROM `posts` WHERE `id`='{$post_id}'";
+    $result = mysqli_query($db, $sql);
+       if (mysqli_num_rows($result) == 0) {
+        $message="There is no posts available";
+    } 
+    else {
+     $row=mysqli_fetch_array($result);
+    return $row;
+    
+      }
+  }
+
+
 
  public static function checkForExistingUserName($name)
   {
@@ -313,11 +397,11 @@ $message="";
   }
 
 
-    public static function CreateComment($post_id, $user_id,$comment)
+    public static function CreateComment($post_id, $user_id,$comment,$date)
   {
 
     $db = mysqli_connect("localhost", "root", "", "simple_blog");
-    $sql = "INSERT INTO `comments` (`post_id`,`user_id`,`body`) VALUES ('{$post_id}','{$user_id}','{$comment}')";
+    $sql = "INSERT INTO `comments` (`post_id`,`user_id`,`body`,`created_date`) VALUES ('{$post_id}','{$user_id}','{$comment}','{$date}')";
     $result = mysqli_query($db, $sql);
     mysqli_close($db);
     if($result) {

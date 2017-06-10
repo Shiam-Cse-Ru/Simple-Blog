@@ -18,7 +18,7 @@ $getyserjoineddate=Model::GetUserjoindate($user_name);
 
 <div class="row">
 <div class="col-md-10 col-md-offset-1">
-<div class="panel panel-default">
+<div class="panel panel-info">
             <div class="panel-heading">
               <h2><?php echo $user_name; ?>
             </h2>
@@ -27,7 +27,7 @@ $getyserjoineddate=Model::GetUserjoindate($user_name);
               <div>
   <ul class="list-group">
     <li class="list-group-item">
-      Joined on  <td><?php echo $getyserjoineddate; ?></td>
+      <strong>Joined on </strong> <td><?php echo $getyserjoineddate; ?></td>
     </li>
     <li class="list-group-item panel-body">
       <table class="table-padding">
@@ -54,40 +54,52 @@ $getyserjoineddate=Model::GetUserjoindate($user_name);
       </tbody></table>
     </li>
     <li class="list-group-item">
-      <td>Total Comments</td> 
+      <td>Total Comments&nbsp</td> 
       <td> <?php echo $TotalComments; ?></td>
     </li>
   </ul>
 </div>
 
-<div class="panel panel-default">
+<div class="panel panel-info">
   <div class="panel-heading"><h3>Latest Posts</h3></div>
   <div class="panel-body">
+      <?php $LatesPosts=Model::GetLatestPostByUserId($user_id); 
+       
+        while($row=mysqli_fetch_array($LatesPosts)){
+      ?>
               <p>
-        <strong><a href="http://localhost/blog-master/public/sdgdgd">Under Construct</a></strong>
-        <span class="well-sm">On Jun 02,2017 at 01:57 pm</span>
+        <strong><a href="?controller=posts&action=show&id=<?php echo $row['id']; ?>"><?php echo $row['title']; ?></a></strong>
+        <span class="well-sm">On <?php echo $row['created_date']; ?></span>
       </p>
-          <p>
-        <strong><a href="http://localhost/blog-master/public/sadfsdfsddfsddgf">Under Construct</a></strong>
-        <span class="well-sm">On Jun 02,2017 at 01:59 pm</span>
-      </p>
+        
+      <?php } ?>
           </div>
 </div>
 
-<div class="panel panel-default">
+<div class="panel panel-info">
   <div class="panel-heading"><h3>Latest Comments</h3></div>
   <div class="list-group">
-              <div class="list-group-item">
-        <p>Under Construct</p>
-        <p>On Jun 02,2017 at 06:01 pm</p>
-        <p>On post <a href="http://localhost/blog-master/public/sadfsdfsddfsddgf">Under Construct</a></p>
+    <?php 
+    $LatestComments=Model::GetLatestCommentByUserId($user_id); 
+
+       if ($LatestComments) {
+    
+        while($comment=mysqli_fetch_array($LatestComments)){
+
+          $postId=$comment['post_id'];
+          $postname=Model::GetPostByPostId($postId);
+      ?>
+        <div class="list-group-item">
+        <p><strong>Comment Description: </strong><?php echo $comment['body']; ?></p>
+        <p>On <?php echo $comment['created_date']; ?></p>
+        <p>On post <a href="?controller=posts&action=show&id=<?php echo $postId; ?>"><?php echo $postname[0] ; ?></a></p>
       </div>
-          <div class="list-group-item">
-        <p>Under Construct</p>
-        <p>On Jun 02,2017 at 06:05 pm</p>
-        <p>On post <a href="http://localhost/blog-master/public/wikipedia">Under Construct</a></p>
-      </div>
-          </div>
+        
+  <?php } } else{?>
+
+<?php echo "<h4>You have no Comments.</h4>"; }?>
+
+   </div>
 </div>
             </div>
           </div>

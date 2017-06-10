@@ -7,7 +7,7 @@
 <div class="row">
 <div class="col-md-10 col-md-offset-1">
 
-<div class="panel panel-default">
+<div class="panel panel-info">
   <div class="panel-heading">
     <h3>Latest Posts</h3>
   </div>
@@ -18,12 +18,16 @@
 $_SESSION['allposts']=$posts;
  if (isset($_SESSION['allposts'])) {
 
-  while($post=mysqli_fetch_array($posts)) { ?>
+  while($post=mysqli_fetch_array($posts)) { 
+    $userid=$post['user_id'];
+    $Getusername=Model::GetuserNameByPostUserId($userid);
+    ?>
+
     <div class="list-group">
     <div class="list-group-item">
-      <h3><a href="#">  <h3><?php echo $post['title']; ?></h3></a>
+      <h3><a href="?controller=posts&action=show&id=<?php echo $post['id']; ?>">  <h3><?php echo $post['title']; ?></h3></a>
               </h3>
-      <p>Jun 02,2017 at 01:59 pm By <a href="#">shiam</a></p>
+      <p><?php echo $post['created_date']; ?> By <a href="#"><?php echo $Getusername[0]; ?></a></p>
       
     </div>
     <div class="list-group-item">

@@ -37,7 +37,7 @@ else if(isset($_SESSION['delete_error'])){
 
 <div class="row">
 <div class="col-md-10 col-md-offset-1">
-<div class="panel panel-default">
+<div class="panel panel-info">
   <div class="panel-heading">
     <h3>My Posts</h3>
    
@@ -54,7 +54,7 @@ else if(isset($_SESSION['delete_error'])){
               </h3>
       <button class="btn btn-default" style="float: right"><a href="?controller=pages&action=edit_post&id=<?php echo $post['id']; ?>">Edit Post</a></button>
 
-      <p>Jun 02,2017 at 01:59 pm By <a href="#"> <?php echo $username['user_name'];?></a></p>
+      <p><?php echo $post['created_date']; ?> By <a href="#"> <?php echo $username['user_name'];?></a></p>
       
 
     </div>
