@@ -1,7 +1,6 @@
 <?php session_start(); ?>
-<div class="container">
-
   <?php include 'header.php'; ?>
+<div class="container">
 
   <div class="row">
    <div class="col-sm-4"><img src="bootstrap/img/logo2.jpg" alt="Wisdom Pets." class="img-responsive"></div>
@@ -36,12 +35,8 @@
           <p><a href="#" class="btn btn-readmore btn-primary">Read more >></a></p>
       </div>
   </div>
-  <footer>
-  <nav class="navbar navbar-default navbar-inverse" style="background-color: #4B77BE;" role="navigation">
-   
-      <p class="text-center"><b>Copyright@Abdullah Al Shiam</b></p>
+ 
 
-    </nav>
-    </footer>
 </div><!-- end container -->
   
+<?php include 'footer.php'; ?>   

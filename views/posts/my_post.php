@@ -11,24 +11,26 @@ if (isset($_SESSION['user_name'])) {
        $username=Model::getUserNameByUserId($user_id);
       $_SESSION['my_post_success']=$posts;
  ?>
-
- <div class="container">
 <?php include 'header.php'; ?>
+ <div class="container">
+
 
 <?php if (isset($_SESSION['delete_success'])) {
- echo'<div class="flash alert-success">
-        <p class="panel-body">
+ echo "<div class='alert alert-success'>
+   <a href='' class='close' data-dismiss='alert'>×</a>
+        <p>
           Post Successfully Delete
         </p>
-      </div>';
+      </div>";
       unset($_SESSION['delete_success']);
 } 
 else if(isset($_SESSION['delete_error'])){
- echo'<div class="flash alert-danger">
-        <p class="panel-body">
+ echo "<div class='alert alert-danger'>
+   <a href='' class='close' data-dismiss='alert'>×</a>
+        <p>
           Something wrong
         </p>
-      </div>';
+      </div>";
      unset($_SESSION['delete_error']);
 }
 
@@ -50,7 +52,7 @@ else if(isset($_SESSION['delete_error'])){
   while($post=mysqli_fetch_array($posts)) { ?>
     <div class="list-group">
     <div class="list-group-item">
-      <h3><a href="#">  <h3><?php echo $post['title']; ?></h3></a>
+      <h3><a href="?controller=posts&action=show&id=<?php echo $post['id']; ?>">  <h3><?php echo $post['title']; ?></h3></a>
               </h3>
       <button class="btn btn-default" style="float: right"><a href="?controller=pages&action=edit_post&id=<?php echo $post['id']; ?>">Edit Post</a></button>
 
@@ -72,7 +74,8 @@ else if(isset($_SESSION['delete_error'])){
 else{
 
 echo "<div class='alert alert-info'>
-  <strong>Opps!</strong> You have no post available.
+  <a href='' class='close' data-dismiss='alert'>×</a>
+  <strong>Opps!</strong> <p>You have no post available.</p>
 </div>";  
 }
 
@@ -84,17 +87,11 @@ echo "<div class='alert alert-info'>
 </div>
 </div>
 </div>
- <footer>
-  <nav class="navbar navbar-default navbar-inverse" style="background-color: #4B77BE;"  role="navigation">
-   
+ 
 
-      <p class="text-center"><b>Copyright@Abdullah Al Shiam</b></p>
-
-    </nav>
-    </footer>
 </div><!-- end container -->
   
-
+<?php include 'footer.php'; ?>
 
 
   

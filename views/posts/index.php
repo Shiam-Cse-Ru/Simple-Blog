@@ -1,11 +1,16 @@
 <?php session_start(); ?>
-
-<div class="container">
 <?php include 'header.php'; ?>
-
+<div class="container">
 
 <div class="row">
 <div class="col-md-10 col-md-offset-1">
+<?php if (isset($_SESSION['user_name'])) {
+  echo " <div class='alert alert-success'>
+              <a href='' class='close' data-dismiss='alert'>×</a>
+                <p>Login Successfull.</p>
+            </div>";
+} ?>
+
 
 <div class="panel panel-info">
   <div class="panel-heading">
@@ -57,13 +62,7 @@ else{
 
 </div>
 </div>
- <footer>
-  <nav class="navbar navbar-default navbar-inverse" style="background-color: #4B77BE;"  role="navigation">
-   
 
-      <p class="text-center"><b>Copyright@Abdullah Al Shiam</b></p>
-
-    </nav>
-    </footer>
 </div><!-- end container -->
   
+<?php include 'footer.php'; ?>

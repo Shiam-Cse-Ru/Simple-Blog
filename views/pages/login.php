@@ -34,11 +34,17 @@
 
 
 
-
+<?php include 'header.php'; ?>
 <div class="container">
-	<?php include 'header.php'; ?>
+	
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
+        <?php if (isset($_SESSION['user_name'])) {
+  echo " <div class='alert alert-success'>
+              <a href='' class='close' data-dismiss='alert'>×</a>
+                <p>Registration Successfull.Please login</p>
+            </div>";
+} ?>
             <div class="panel panel-default">
                 <div class="panel-heading">Login</div>
                 <div class="panel-body">
@@ -69,8 +75,8 @@
                             </div>
 
                             <div class="form-group">
-                                <input type="submit" name="submit" class="btn btn-primary">
-                                    <i class="fa fa-btn fa-sign-in"></i>
+                                <input type="submit" name="submit" class="btn btn-primary" value="Login">
+                                   
                                 </input>
 
                                 <a class="btn btn-link" href="">Forgot Your Password?</a>
@@ -82,4 +88,4 @@
     </div>
 </div>
 
-
+<?php include 'footer.php'; ?>

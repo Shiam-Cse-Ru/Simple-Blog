@@ -9,7 +9,7 @@ if (isset($_SESSION['user_name'])) {
 
 if (isset($_POST['publish'])) {
      if (trim($_POST['title'])=='' || trim($_POST['content'])=='' || trim($_POST['description'])=='') {
-                                $message = "Please fill all the fields with valid data.";
+                                $errmsg = "Please fill all the fields with valid data.";
                             } 
 
                               else {
@@ -69,17 +69,19 @@ if (isset($_POST['save'])) {
 
 
  ?>
-
+  <?php include 'header.php'; ?>
 <div class="container">
-	<?php include 'header.php'; ?>
+
     
     <div class="row">
       <div class="col-md-10 col-md-offset-1">
-       <?php echo !empty($successmsg)?'<div class="flash alert-success">
+       <?php echo !empty($successmsg)?'<div class="alert alert-success">
+
       <p class="panel-body">'.$successmsg.'</p>
       </div>':''; ?>
 
-       <?php echo !empty($errmsg)?'<div class="flash alert-danger">
+       <?php echo !empty($errmsg)?'<div class="alert alert-danger">
+
       <p class="panel-body">'.$errmsg.'</p>
       </div>':''; ?>
                     <div class="panel panel-info">
@@ -106,3 +108,5 @@ if (isset($_POST['save'])) {
                     </div>
                 </div>
 </div>
+</div>
+<?php include 'footer.php'; ?>

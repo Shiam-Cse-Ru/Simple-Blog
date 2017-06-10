@@ -85,16 +85,18 @@ if (isset($_POST['delete'])) {
 
 $post=Model::find($_GET['id']);
   ?>
-
+  <?php include 'header.php'; ?>
 <div class="container">
-	<?php include 'header.php'; ?>
+
     
     <div class="row">
       <div class="col-md-10 col-md-offset-1">
-       <?php echo !empty($successmsg)?'<div class="flash alert-success">
+       <?php echo !empty($successmsg)?'<div class="alert alert-success">
+
       <p class="panel-body">'.$successmsg.'</p>
       </div>':''; ?>
-       <?php echo !empty($errmsg)?'<div class="flash alert-danger">
+       <?php echo !empty($errmsg)?'<div class="alert alert-danger">
+
       <p class="panel-body">'.$errmsg.'</p>
       </div>':''; ?>
                     <div class="panel panel-info">
@@ -122,3 +124,5 @@ $post=Model::find($_GET['id']);
                     </div>
                 </div>
 </div>
+</div>
+<?php include 'footer.php'; ?>

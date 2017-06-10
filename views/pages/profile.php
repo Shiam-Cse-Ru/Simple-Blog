@@ -12,9 +12,8 @@ $PosInDraft=Model::TotalDraftPosts($user_id);
 $TotalComments=Model::TotalComments($user_id);
 $getyserjoineddate=Model::GetUserjoindate($user_name);
  ?>
-<div class="container">
 <?php include 'header.php'; ?>
-
+<div class="container">
 
 <div class="row">
 <div class="col-md-10 col-md-offset-1">
@@ -105,17 +104,10 @@ $getyserjoineddate=Model::GetUserjoindate($user_name);
           </div>
 </div>
 </div>
- <footer>
-  <nav class="navbar navbar-default navbar-inverse" style="background-color: #4B77BE;"  role="navigation">
-   
-
-      <p class="text-center"><b>Copyright@Abdullah Al Shiam</b></p>
-
-    </nav>
-    </footer>
+ 
 </div><!-- end container -->
   
-
+<?php include 'footer.php'; ?>
 
 
   

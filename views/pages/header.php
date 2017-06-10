@@ -1,23 +1,12 @@
-  <div class="row">
+<div class="navbar navbar-inverse navbar-static-top">
+ 
+ <div class="container">
+ 
+ <a href="#" class="navbar-brand">Simple Blog </a> <button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse"></button>
 
-  <div class="navbar navbar-default navbar-inverse"  role="navigation">
-  
-    <div class="nav-header">
+      <div class="collapse navbar-collapse navHeaderCollapse">
 
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-  
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-
-      </button>
-  
-      <a href="#" class="navbar-brand">Blog</a>
-
-    </div>
-  
-      <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
+      <ul class="nav navbar-nav">
               <li ><a href='?controller=pages&action=home'>Home</a></li>
             <li class="active "><a href='?controller=posts&action=index'>Blog</a></li>
             <?php if (!isset($_SESSION['user_name'])) {
@@ -59,10 +48,6 @@
         </ul>
    <?php } ?>
    
-
-
-
       </div>
-
-</div>
+    </div>
   </div>

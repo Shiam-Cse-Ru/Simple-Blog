@@ -6,7 +6,7 @@ $message="";
                     if (isset($_POST['submit'])) {
 
                             if (trim($_POST['name'])=='' || trim($_POST['email'])=='' || trim($_POST['password'])=='') {
-                                $message = "Please fill all the fields with valid data.";
+                                $errmsg = "Please fill all the fields with valid data.";
                             } 
 
                             else {
@@ -29,9 +29,8 @@ $message="";
                                     }
 
                                     else {
-              $_SESSION['registration_error'] = "<span class='error'>Unknown problem occured. Try again.</span>";
-              header("Location: ?controller=pages&action=register");
-            }
+                                           $errmsg="Something went wrong.";
+                                       }
                                 }
                             }
                             
@@ -43,11 +42,18 @@ $message="";
 
  ?>
 
-
+ <?php include 'header.php'; ?>
 <div class="container">
-    <?php include 'header.php'; ?>
+   
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
+        <?php if(!empty($errmsg)){ ?>
+           <div class='alert alert-danger'>
+              <a href='' class='close' data-dismiss='alert'>×</a>
+                <p><?php echo $errmsg; ?></p>
+            </div>
+
+          <?php  } ?>
             <div class="panel panel-default">
                 <div class="panel-heading">Register</div>
                 <div class="panel-body">
@@ -78,7 +84,7 @@ $message="";
                         
 
                             <div class="form-group">
-                                <input type="submit" name="submit" class="btn btn-primary">
+                                <input type="submit" name="submit" class="btn btn-primary" value="Register">
                                     
                                
 
@@ -90,3 +96,4 @@ $message="";
     </div>
 </div>
 
+<?php include 'footer.php'; ?>

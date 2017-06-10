@@ -18,10 +18,7 @@ if (isset($_POST['post'])) {
              $date=date("Y-m-d h:i:sa");
              $user_id=Model::getUserIdByUserName($user_name);   
               if (Model::CreateComment($post_id, $user_id, $comment,$date)) {
-                    //$user_id = getUserIdByUserName($name);
-                   //$_SESSION['post'] =true;
-
-                    // header('Location: ?controller=posts&action=show&id='.$id);
+                 
                     $successmsg="Comments create successful.";
                     }
 
@@ -52,13 +49,12 @@ $on_comment_user_id=Model::GetUserIdByPostId($_GET['id']);
                        }
 						
  ?> -->
-
-<div class="container">
 <?php include 'header.php'; ?>
+<div class="container">
 
 <div class="row">
 <div class="col-md-10 col-md-offset-1">
-
+<div class="well">
 <div class="panel panel-info">
   <div class="panel-heading">
     <h3><p><?php echo $post['title'];?></p></h3>
@@ -70,7 +66,7 @@ $on_comment_user_id=Model::GetUserIdByPostId($_GET['id']);
 
 <hr>
 
-       <?php echo !empty($successmsg)?'<div class="flash alert-success">
+       <?php echo !empty($successmsg)?'<div class="alert alert-success">
       <p class="panel-body">'.$successmsg.'</p>
       </div>':''; ?>
 
@@ -112,18 +108,16 @@ $on_comment_user_id=Model::GetUserIdByPostId($_GET['id']);
 						</div>
 					</div>
 				</div>
-				<?php } } ?>
+				<?php } } else{?>
+       <div class="alert alert-info">
+              <a href="" class="close" data-dismiss="alert">×</a>
+                 <?php echo "<p>Opps no comments are available.</p>"; }?>
+            </div>
+            </div>
+        
 </div>
 </div>
 
-
- 
- <footer>
-  <nav class="navbar navbar-default navbar-inverse" style="background-color: #4B77BE;" role="navigation">
-
-      <p class="text-center"><b>Copyright@Abdullah Al Shiam</b></p>
-
-    </nav>
-    </footer>
 </div><!-- end container -->
   
+<?php include 'footer.php'; ?>
