@@ -53,8 +53,8 @@ $on_comment_user_id=Model::GetUserIdByPostId($_GET['id']);
 <div class="container">
 
 <div class="row">
-<div class="col-md-10 col-md-offset-1">
-<div class="well">
+<div class="col-md-10 col-md-offset-1 d-inline bg-default">
+<div class="panel panel-body panel-default">
 <div class="panel panel-info">
   <div class="panel-heading">
     <h3><p><?php echo $post['title'];?></p></h3>
@@ -84,7 +84,8 @@ $on_comment_user_id=Model::GetUserIdByPostId($_GET['id']);
         </form>
         </div>
         <?php } ?>
-     <h3 style="padding-left: 20px; padding-top: 25px;"><b>All Comments</b></h3>
+        <div class="well">
+     <h3 style="padding-left: 20px; padding-top: 25px;"><b>Comments</b></h3>
          <?php if (isset($_SESSION['post_success'])) {
          
          
@@ -115,6 +116,7 @@ $on_comment_user_id=Model::GetUserIdByPostId($_GET['id']);
             </div>
             </div>
         
+</div>
 </div>
 </div>
 
