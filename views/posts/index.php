@@ -4,13 +4,6 @@
 
 <div class="row">
 <div class="col-md-10 col-md-offset-1">
-<?php if (isset($_SESSION['user_name'])) {
-  echo " <div class='alert alert-success'>
-              <a href='' class='close' data-dismiss='alert'>×</a>
-                <p>Login Successfull.</p>
-            </div>";
-} ?>
-
 
 <div class="panel panel-info">
   <div class="panel-heading">

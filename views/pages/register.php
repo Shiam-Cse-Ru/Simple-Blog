@@ -54,7 +54,7 @@ $message="";
             </div>
 
           <?php  } ?>
-            <div class="panel panel-default">
+            <div class="panel panel-info">
                 <div class="panel-heading">Register</div>
                 <div class="panel-body">
                         

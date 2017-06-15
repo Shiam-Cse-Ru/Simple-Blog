@@ -428,6 +428,27 @@ $message="";
         
     }
 
+
+  public static function DeleteShowByUserId($user_id,$id) {
+     
+       $db = mysqli_connect("localhost", "root", "", "simple_blog");
+      $result =mysqli_query($db,"SELECT * FROM posts WHERE user_id='$user_id' AND id='$id' ");
+       mysqli_close($db);
+
+     if (mysqli_num_rows($result) == 0) {
+        $message="There is no posts available";
+    } 
+    else {
+
+   
+    return true;
+    
+      }
+        
+    }
+      
+
+
     public static function UpdatePostPublish($id,$title, $content,$description)
   {
     $i=1;
@@ -468,6 +489,20 @@ $message="";
       return false;
     }
   }
+
+ public static function DeleteComment($id)
+  {
+    $db = mysqli_connect("localhost", "root", "", "simple_blog");
+    $sql = "DELETE FROM comments WHERE id='$id'";
+    $result = mysqli_query($db, $sql);
+    mysqli_close($db);
+    if($result) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
 
   }
 ?>

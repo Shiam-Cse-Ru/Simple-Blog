@@ -22,6 +22,12 @@
 
       require_once('views/pages/create_post.php');
     }
+
+     public function delete_comment(){
+
+
+      require_once('views/pages/delete_comment.php');
+    }
     
       public function edit_post(){
 

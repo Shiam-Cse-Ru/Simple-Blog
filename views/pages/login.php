@@ -45,7 +45,7 @@
                 <p>Registration Successfull.Please login</p>
             </div>";
 } ?>
-            <div class="panel panel-default">
+            <div class="panel panel-info">
                 <div class="panel-heading">Login</div>
                 <div class="panel-body">
         

@@ -62,7 +62,8 @@ $getyserjoineddate=Model::GetUserjoindate($user_name);
 <div class="panel panel-info">
   <div class="panel-heading"><h3>Latest Posts</h3></div>
   <div class="panel-body">
-      <?php $LatesPosts=Model::GetLatestPostByUserId($user_id); 
+      <?php $LatesPosts=Model::GetLatestPostByUserId($user_id);
+      if($LatesPosts){ 
        
         while($row=mysqli_fetch_array($LatesPosts)){
       ?>
@@ -71,7 +72,8 @@ $getyserjoineddate=Model::GetUserjoindate($user_name);
         <span class="well-sm">On <?php echo $row['created_date']; ?></span>
       </p>
         
-      <?php } ?>
+      <?php } } else {?>
+      <?php echo "<h3>You have no latests post.</h3>"; }?>
           </div>
 </div>
 
@@ -96,7 +98,7 @@ $getyserjoineddate=Model::GetUserjoindate($user_name);
         
   <?php } } else{?>
 
-<?php echo "<h4>You have no Comments.</h4>"; }?>
+<?php echo "<h3>You have no Comments.</h3>"; }?>
 
    </div>
 </div>

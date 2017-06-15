@@ -7,6 +7,7 @@ if (isset($_SESSION['user_name'])) {
   
 }
 $id=$_GET['id'];
+
 if (isset($_POST['post'])) {
 	 if (trim($_POST['comment'])=='') {
          $errmsg = "Please fill all the fields with valid data.";
@@ -38,17 +39,10 @@ if (isset($_POST['post'])) {
   $_SESSION['post_success']=$show_comment;
 
   ?>
-<!-- <?php 
 
-$on_comment_user_id=Model::GetUserIdByPostId($_GET['id']);
 
-						  while ($id=mysqli_fetch_array($on_comment_user_id)) {
-	                         $data[$i++]=$id['user_id'];
 
-                           echo $i."<br>";
-                       }
-						
- ?> -->
+
 <?php include 'header.php'; ?>
 <div class="container">
 
@@ -84,6 +78,20 @@ $on_comment_user_id=Model::GetUserIdByPostId($_GET['id']);
         </form>
         </div>
         <?php } ?>
+        <?php if (isset($_SESSION['delete_success'])) {
+          echo "<div class='alert alert-success'>
+              <a href='' class='close' data-dismiss='alert'>×</a>
+                <p>Comments successfullt delete.</p>
+            </div>";
+        } ?>
+
+
+          <?php if (isset($_SESSION['delete_error'])) {
+          echo "<div class='alert alert-warning'>
+              <a href='' class='close' data-dismiss='alert'>×</a>
+                <p>Can not delete comments.</p>
+            </div>";
+        } ?>
         <div class="well">
      <h3 style="padding-left: 20px; padding-top: 25px;"><b>Comments</b></h3>
          <?php if (isset($_SESSION['post_success'])) {
@@ -105,7 +113,17 @@ $on_comment_user_id=Model::GetUserIdByPostId($_GET['id']);
 						</div>
 
 						<div class="list-group-item">
-							<p><?php echo $show_comments['body']; ?></p>
+							<p><?php echo $show_comments['body'];?> 
+               <?php 
+               $user_id=Model::getUserIdByUserName($user_name);  
+               $DeleteComment=Model::DeleteShowByUserId($user_id,$_GET['id']); 
+               if ($DeleteComment) {
+                 
+               
+               ?>
+              <a href="?controller=pages&action=delete_comment&id=<?php echo $show_comments['id']; ?>"" class="btn btn-danger btn-sm pull-right">Delete</a>
+<?php } ?>
+              </p>
 						</div>
 					</div>
 				</div>
