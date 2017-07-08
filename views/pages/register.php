@@ -13,10 +13,11 @@ $message="";
                                 $name = trim($_POST['name']);
                                 $email = trim($_POST['email']);
                                 $password = trim($_POST['password']);
-                                $date=date("Y-m-d h:i:sa");
+                               $date=date("Y-m-d h:i:s",strtotime('+4 hour'));
+                                // $date=date("d M Y H:i:s ",strtotime('-8 hour'));
                                 if (Model::checkForExistingUserName($name)) {
-                                    $_SESSION['registration_error'] = "<span class='error'>The provided User Name is unavailable. Enter a different User Name.</span>";
-                                      header("Location: ?controller=pages&action=register");
+                                     $errmsg= "<span class='error'>The provided User Name is unavailable. Enter a different User Name.</span>";
+                                      
                                 } 
 
                                 else {
@@ -24,7 +25,8 @@ $message="";
                                     if (Model::CreateNewuser($name, $email, $password,$date)) {
                                          //$user_id = getUserIdByUserName($name);
                                          $_SESSION['user_name'] = $name;
-                                            header('Location: ?controller=pages&action=login');
+                                             echo"<script>alert('Registration Successful and you are logged in.')</script>";
+                                            echo"<script>window.open('?controller=posts&action=index','_self')</script>";
 
                                     }
 

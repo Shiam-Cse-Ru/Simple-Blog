@@ -19,6 +19,7 @@
                                     $user_name=Model::getUserNameByUserEmail($email);
                                     $_SESSION['user_name'] = $user_name;
                                     $successmessage = "Logging-in successful.";
+                                    echo"<script>alert('Login Successful.')</script>";
                                      echo"<script>window.open('?controller=posts&action=index','_self')</script>";
                                 }
                             }
@@ -66,20 +67,13 @@
                                
                             </div>
 
-                            <div class="form-group">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember"> Remember Me
-                                    </label>
-                                </div>
-                            </div>
+                           
 
                             <div class="form-group">
                                 <input type="submit" name="submit" class="btn btn-primary" value="Login">
                                    
                                 </input>
 
-                                <a class="btn btn-link" href="">Forgot Your Password?</a>
                             </div>
                         </form>
                 </div>

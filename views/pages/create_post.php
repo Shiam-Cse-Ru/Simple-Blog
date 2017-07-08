@@ -16,7 +16,7 @@ if (isset($_POST['publish'])) {
                                 $title =$_POST['title'];
                                 $content = $_POST['content'];
                                 $description =$_POST['description'];
-                                $date=date("Y-m-d h:i:sa");
+                                $date=date("Y-m-d h:i:s",strtotime('+4 hour'));
 
                           
 

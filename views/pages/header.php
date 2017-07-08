@@ -8,7 +8,7 @@
 
       <ul class="nav navbar-nav">
               <li ><a href='?controller=pages&action=home'>Home</a></li>
-            <li class="active "><a href='?controller=posts&action=index'>Blog</a></li>
+            <li><a href='?controller=posts&action=index'>Blog</a></li>
             <?php if (!isset($_SESSION['user_name'])) {
             
             ?>

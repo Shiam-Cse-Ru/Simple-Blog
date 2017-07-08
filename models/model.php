@@ -6,7 +6,7 @@ $message="";
     public static function all() {
      
        $db = mysqli_connect("localhost", "root", "", "simple_blog");
-       $result =mysqli_query($db,'SELECT * FROM posts WHERE active=1 ORDER BY `id` DESC');
+       $result =mysqli_query($db,'SELECT * FROM posts WHERE active=1 ORDER BY created_date DESC');
        mysqli_close($db);
 
      if (mysqli_num_rows($result) == 0) {
@@ -414,7 +414,7 @@ $message="";
    public static function Show_Comment($id) {
      
        $db = mysqli_connect("localhost", "root", "", "simple_blog");
-       $result =mysqli_query($db,"SELECT * FROM comments WHERE post_id='$id' ");
+       $result =mysqli_query($db,"SELECT * FROM comments WHERE post_id='$id' ORDER BY created_date DESC");
        mysqli_close($db);
 
      if (mysqli_num_rows($result) == 0) {

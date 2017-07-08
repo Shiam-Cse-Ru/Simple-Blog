@@ -16,7 +16,7 @@ if (isset($_POST['post'])) {
          else {
              $comment = trim($_POST['comment']);
              $post_id=$_GET['id'];
-             $date=date("Y-m-d h:i:sa");
+              $date=date("Y-m-d h:i:s",strtotime('+4 hour'));
              $user_id=Model::getUserIdByUserName($user_name);   
               if (Model::CreateComment($post_id, $user_id, $comment,$date)) {
                  
@@ -60,9 +60,15 @@ if (isset($_POST['post'])) {
 
 <hr>
 
-       <?php echo !empty($successmsg)?'<div class="alert alert-success">
-      <p class="panel-body">'.$successmsg.'</p>
-      </div>':''; ?>
+       <?php if (isset($successmsg)) {
+ echo "<div class='alert alert-success'>
+   <a href='' class='close' data-dismiss='alert'>×</a>
+        <p>"
+         .$successmsg.
+        "</p>
+      </div>";
+      
+}  ?>
 
 <?php if (isset($_SESSION['user_name'])) {
 	
@@ -81,7 +87,7 @@ if (isset($_POST['post'])) {
         <?php if (isset($_SESSION['delete_success'])) {
           echo "<div class='alert alert-success'>
               <a href='' class='close' data-dismiss='alert'>×</a>
-                <p>Comments successfullt delete.</p>
+                <p>Comments successfully delete.</p>
             </div>";
         } ?>
 
@@ -115,6 +121,10 @@ if (isset($_POST['post'])) {
 						<div class="list-group-item">
 							<p><?php echo $show_comments['body'];?> 
                <?php 
+               if (isset($_SESSION['user_name'])) {
+                    $user_name=$_SESSION['user_name'];
+  
+                
                $user_id=Model::getUserIdByUserName($user_name);  
                $DeleteComment=Model::DeleteShowByUserId($user_id,$_GET['id']); 
                if ($DeleteComment) {
@@ -122,7 +132,7 @@ if (isset($_POST['post'])) {
                
                ?>
               <a href="?controller=pages&action=delete_comment&id=<?php echo $show_comments['id']; ?>"" class="btn btn-danger btn-sm pull-right">Delete</a>
-<?php } ?>
+<?php } }?>
               </p>
 						</div>
 					</div>
