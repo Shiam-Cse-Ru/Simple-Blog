@@ -1,4 +1,4 @@
-# Simple-Blog
+# A Simple-Blog
 Academic Project
 <pre>This shows simple blog having the following criteria.</pre>
 •	To use the blog user have to register using user id, password, full name country and email id.<br>
