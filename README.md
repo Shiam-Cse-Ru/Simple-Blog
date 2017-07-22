@@ -1,4 +1,5 @@
 # Simple-Blog
+Academic Project
 <pre>This shows simple blog having the following criteria.</pre>
 •	To use the blog user have to register using user id, password, full name country and email id.<br>
 •	After login user can create posts. There should have a javascript based rich text editor (such as tinymce) for this purpose.<br>
